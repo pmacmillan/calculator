@@ -1,3 +1,11 @@
+describe('CalculatorCtrl', function () {
+  beforeEach(module('Calculator'));
+
+  it('exists', inject(function ($controller) {
+    var ctrl = $controller('CalculatorCtrl', { $scope: {} });
+    expect(ctrl).toBeDefined();
+  }));
+});
 
 describe('Calculator', function () {
   beforeEach(module('Calculator'));
