@@ -6,7 +6,7 @@ module.exports = function(config){
     files : [
       'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.js',
       'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-mocks.js',
-      'js/**/modules.js',
+      'js/**/module.js',
       'js/**/*.js',
       'test/unit/**/*.js'
     ],

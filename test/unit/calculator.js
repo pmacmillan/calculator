@@ -1,42 +1,35 @@
 
 
-describe('calculator', function () {
-  beforeEach(module('CalculatorApp'));
+describe('Calculator', function () {
+  beforeEach(module('Calculator'));
 
-  it('should exist', inject(function ($controller) {
-    var Ctrl = $controller('CalculatorCtrl', { $scope: {} });
-    expect(Ctrl).toBeDefined();
-  }));
+  describe('#pressButton', function () {
+    it('should add two numbers', inject(function C(Calculator) {
+      var calc = new Calculator();
 
-  describe('exec', function () {
-    it('should add numbers together', inject(function ($controller) {
-      var $scope = {};
-      var Ctrl = $controller('CalculatorCtrl', { $scope: $scope });
-      var calc = Ctrl.calculator;
+      calc.push('5');
+      calc.push('+');
+      calc.push('2');
+      calc.push('=');
 
-      calc.exec('6');
-      calc.exec('+');
-      calc.exec('9');
-      calc.exec('=');
+      expect(calc.value).toEqual(7);
 
-      expect($scope.calculator.value).toEqual(15);
-    }));
+      calc.push('C');
+      calc.push('8');
+      calc.push('+');
+      calc.push('5');
+      calc.push('=');
 
-    it('should remember values', inject(function ($controller) {
-      var $scope = {};
-      var Ctrl = $controller('CalculatorCtrl', { $scope: $scope });
-      var calc = Ctrl.calculator;
+      expect(calc.value).toEqual(13);
 
-      calc.exec('4');
-      calc.exec('2');
-      calc.exec('M+');
-      calc.exec('C');
+      calc.push('C');
+      calc.push('+');
+      calc.push('5');
+      calc.push('=');
 
-      expect(calc.value).toEqual(0);
-
-      calc.exec('MR');
-
-      expect(calc.value).toEqual(42);
+      expect(calc.value).toEqual(5);
     }));
   });
 });
+
+
