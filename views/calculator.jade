@@ -2,111 +2,12 @@ doctype html
 head
   title Calculator
   link(rel='stylesheet' href='/css/calc.css')
-body(ng-app="CalcApp")
+body(ng-app="CalculatorApp")
   .calculator
 
   script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')
-  script.
-    var app = angular.module('CalcApp', []);
-    app.directive('calculator', function () {
-      var DIGIT = /^[0-9]$/
-        , OP = /^[×\/+-]$/
 
-      return {
-        restrict: 'C',
-        templateUrl: '/templates/calc.html',
-        controller: CalcCtrl
-      };
-
-      function CalcCtrl ($scope) {
-        var stack = []
-          , restart = false
-          , memory = 0
-          , i;
-
-        $scope.value = 0;
-
-        this.exec = function execCommand(name) {
-          if (DIGIT.exec(name)) {
-            if (restart) {
-              $scope.value = name|0;
-              restart = false;
-            } else {
-              $scope.value = ($scope.value * 10) + (name|0);
-            }
-          } else {
-            switch (name) {
-              case 'C':
-                $scope.value = 0;
-                break;
-              case 'MC':
-                memory = null;
-                break;
-              case 'M+':
-                memory = $scope.value;
-                break;
-              case 'M-':
-                memory = -1 * $scope.value;
-                break;
-              case 'MR':
-                $scope.value = memory|0;
-                break;
-              case '=':
-                stack.push($scope.value|0);
-                $scope.value = 0;
-
-                for (i = 0; i < stack.length; ++i) {
-                  if (OP.exec(stack[i])) {
-                    if ('+' == stack[i]) {
-                      $scope.value = stack[i+1] + stack[i+2];
-                    } else if ('-' == stack[i]) {
-                      $scope.value = stack[i+1] - stack[i+2];
-                    } else if ('×' == stack[i]) {
-                      $scope.value = stack[i+1] * stack[i+2];
-                    } else if ('/' == stack[i]) {
-                      $scope.value = stack[i+1] / stack[i+2];
-                    }
-
-                    i += 2;
-                  }
-                }
-
-                stack = [];
-                break;
-              case '+-':
-                $scope.value = -1 * $scope.value;
-                restart = true;
-                break;
-
-              case '×':
-              case '/':
-              case '+':
-                stack.push(name);
-
-                if (!restart) {
-                  stack.push($scope.value);
-                }
-
-                restart = true;
-                break;
-            }
-          }
-        };
-      }
-    });
-
-    app.directive('calcCmd', function () {
-      return {
-        restrict: 'A',
-        require: '^calculator',
-        link: link
-      };
-
-      function link(scope, el, attr, calculator) {
-        el.attr('type', 'button');
-        el.on('click', function () {
-          calculator.exec(el.text());
-          scope.$digest();
-        });
-      }
-    });
+  script(src='/js/directives/modules.js')
+  script(src='/js/directives/calculator.js')
+  script(src='/js/directives/calculatorCommand.js')
+  script(src='/js/app.js')
