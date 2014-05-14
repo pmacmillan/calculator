@@ -51,7 +51,7 @@ angular.module('Calculator')
       }
 
       if ('=' == button) {
-        this.stack.push(this.value);
+        this.stack.push(this.value|0);
         this.value = evaluate(this.stack);
       }
     }

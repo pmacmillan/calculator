@@ -5,29 +5,21 @@ describe('Calculator', function () {
 
   describe('#pressButton', function () {
     it('should add two numbers', inject(function C(Calculator) {
-      var calc = new Calculator();
+      var tests = [
+        [['5','+','2','='], 7],
+        [['8','+','5','='], 13],
+        [['+','5','='], 5],
+      ];
 
-      calc.push('5');
-      calc.push('+');
-      calc.push('2');
-      calc.push('=');
+      tests.forEach(function (test) {
+        var calc = new Calculator();
+        test[0].forEach(function (key) {
+          calc.push(key);
+        });
 
-      expect(calc.value).toEqual(7);
+        expect(calc.value).toEqual(test[1]);
+      });
 
-      calc.push('C');
-      calc.push('8');
-      calc.push('+');
-      calc.push('5');
-      calc.push('=');
-
-      expect(calc.value).toEqual(13);
-
-      calc.push('C');
-      calc.push('+');
-      calc.push('5');
-      calc.push('=');
-
-      expect(calc.value).toEqual(5);
     }));
   });
 });
