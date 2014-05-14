@@ -8,6 +8,7 @@ app.directive('calculator', function () {
   return {
     restrict: 'C',
     templateUrl: '/templates/calc.html',
+    scope: {},
     controller: CalcCtrl
   };
 
