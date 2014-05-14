@@ -1,7 +1,8 @@
+/* jshint laxcomma:true */
 angular.module('Calculator')
 .provider('Calculator', function () {
   var IS_DIGIT = /^\d$/i
-    , IS_OPERATOR = /^[\+\-\*]$/i;
+    , IS_OPERATOR = /^[\+\-\*\/]$/i;
 
   function Calculator() {
     this.stack = [];
@@ -16,8 +17,8 @@ angular.module('Calculator')
       op = stack.shift();
 
       if (IS_OPERATOR.exec(op)) {
-        left = stack.shift()|0;
-        right = stack.shift()|0;
+        left = +stack.shift();
+        right = +stack.shift();
 
         if (op == '+') {
           result = left + right;
@@ -25,6 +26,8 @@ angular.module('Calculator')
           result = left - right;
         } else if (op == '*') {
           result = left * right;
+        } else if (op == '/') {
+          result = left / right;
         }
       }
     }
@@ -53,13 +56,13 @@ angular.module('Calculator')
 
       if (IS_OPERATOR.exec(button)) {
         this.stack.push(button);
-        this.stack.push(this.value|0);
+        this.stack.push(+this.value);
         this.reset = true;
         return;
       }
 
       if ('=' == button) {
-        this.stack.push(this.value|0);
+        this.stack.push(+this.value);
         this.value = evaluate(this.stack);
       }
     }
