@@ -6,9 +6,9 @@ var http = require('http')
   , server = http.createServer(app);
 
 
+app.locals.pretty = true;
+
 app.use('/js', express.static(__dirname + '/js'));
-
-
 app.use('/css', expressLess(__dirname + '/less'));
 app.get('/', function (req, res) { res.render('calculator.jade'); });
 app.get('/templates/calc.html', function (req, res) { res.render('calc.jade'); });
