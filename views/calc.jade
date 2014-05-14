@@ -1,31 +1,31 @@
-input(type='text')
+input(type='text' ng-model='value')
 table(cellpadding=0 cellspacing = 0)
   tr
-    td: button MC
-    td: button M+
-    td: button M-
-    td: button MR
+    td: button(calc-cmd) MC
+    td: button(calc-cmd) M+
+    td: button(calc-cmd) M-
+    td: button(calc-cmd) MR
   tr
-    td: button C
-    td: button +=
-    td: button /
-    td: button &times;
+    td: button(calc-cmd) C
+    td: button(calc-cmd) +-
+    td: button(calc-cmd) /
+    td: button(calc-cmd) &times;
   tr
-    td: button 7
-    td: button 8
-    td: button 9
-    td: button -
+    td: button(calc-cmd) 7
+    td: button(calc-cmd) 8
+    td: button(calc-cmd) 9
+    td: button(calc-cmd) -
   tr
-    td: button 4
-    td: button 5
-    td: button 6
-    td: button +
+    td: button(calc-cmd) 4
+    td: button(calc-cmd) 5
+    td: button(calc-cmd) 6
+    td: button(calc-cmd) +
   tr
-    td: button 1
-    td: button 2
-    td: button 3
-    td(rowspan="2").equals: button =
+    td: button(calc-cmd) 1
+    td: button(calc-cmd) 2
+    td: button(calc-cmd) 3
+    td(rowspan=2).equals: button(calc-cmd) =
   tr
-    td(colspan=2): button 0
-    td: button .
+    td(colspan=2).zero: button(calc-cmd) 0
+    td: button(calc-cmd) .
 
