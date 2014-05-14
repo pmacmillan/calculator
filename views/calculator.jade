@@ -1,35 +1,38 @@
 doctype html
 head
   title Calculator
+  link(rel='stylesheet' href='/css/calc.css')
 body
 
-  table
-    tr
-      td MC
-      td M+
-      td M-
-      td MR
-    tr
-      td C
-      td +=
-      td /
-      td &times;
-    tr
-      td 7
-      td 8
-      td 9
-      td -
-    tr
-      td 4
-      td 5
-      td 6
-      td +
-    tr
-      td 1
-      td 2
-      td 3
-      td(rowspan="2") =
-    tr
-      td(colspan=2) 0
-      td .
+  .calculator
+    input(type='text')
+    table(cellpadding=0 cellspacing = 0)
+      tr
+        td: button MC
+        td: button M+
+        td: button M-
+        td: button MR
+      tr
+        td: button C
+        td: button +=
+        td: button /
+        td: button &times;
+      tr
+        td: button 7
+        td: button 8
+        td: button 9
+        td: button -
+      tr
+        td: button 4
+        td: button 5
+        td: button 6
+        td: button +
+      tr
+        td: button 1
+        td: button 2
+        td: button 3
+        td(rowspan="2").equals: button =
+      tr
+        td(colspan=2): button 0
+        td: button .
 
