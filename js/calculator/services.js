@@ -1,6 +1,7 @@
 angular.module('Calculator')
 .provider('Calculator', function () {
-  var IS_DIGIT = /^\d$/i;
+  var IS_DIGIT = /^\d$/i
+    , IS_OPERATOR = /^[+-]$/i;
 
   function Calculator() {
     this.stack = [];
@@ -14,11 +15,15 @@ angular.module('Calculator')
     while (stack.length) {
       op = stack.shift();
 
-      if ('+' == op) {
+      if ('+' == op || '-' == op) {
         left = stack.shift()|0;
         right = stack.shift()|0;
 
-        result = left + right;
+        if (op == '+') {
+          result = left + right;
+        } else if (op == '-') {
+          result = left - right;
+        }
       }
     }
 
@@ -44,8 +49,8 @@ angular.module('Calculator')
         return;
       }
 
-      if ('+' == button) {
-        this.stack.push('+');
+      if (IS_OPERATOR.exec(button)) {
+        this.stack.push(button);
         this.stack.push(this.value|0);
         this.reset = true;
         return;
