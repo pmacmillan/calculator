@@ -1,10 +1,11 @@
+/* jshint laxcomma:true */
 
 var app = angular.module('Calculator');
 
 
 app.controller('CalculatorCtrl', function ($scope) {
   var DIGIT = /^[0-9]$/
-    , OP = /^[×\/+-]$/
+    , OP = /^[×\/+-]$/;
 
   var stack = []
     , restart = false
