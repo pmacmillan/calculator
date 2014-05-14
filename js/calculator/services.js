@@ -30,6 +30,7 @@ angular.module('Calculator')
       if (IS_DIGIT.exec(button)) {
         if (this.reset) {
           this.value = button;
+          this.reset = false;
         } else {
           this.value = this.value + button;
         }
