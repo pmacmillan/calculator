@@ -2,84 +2,94 @@
 
 var app = angular.module('Calculator');
 
-
-app.controller('CalculatorCtrl', function ($scope) {
+app.provider('CalculatorTool', function () {
   var DIGIT = /^[0-9]$/
     , OP = /^[×\/+-]$/;
 
-  var stack = []
-    , restart = false
-    , memory = 0
-    , i;
+  function CalculatorTool() {
+    this.value = 0;
+    this.stack = [];
+    this.restart = false;
+    this.memory = 0;
+  }
 
-  $scope.value = 0;
-
-  this.exec = function execCommand(name) {
-    if (DIGIT.exec(name)) {
-      if (restart) {
-        $scope.value = name|0;
-        restart = false;
+  CalculatorTool.prototype.exec = function (command) {
+    if (DIGIT.exec(command)) {
+      if (this.restart) {
+        this.value = command|0;
+        this.restart = false;
       } else {
-        $scope.value = ($scope.value * 10) + (name|0);
+        this.value = (this.value * 10) + (command|0);
       }
     } else {
-      switch (name) {
+      switch (command) {
         case 'C':
-          $scope.value = 0;
+          this.value = 0;
           break;
         case 'MC':
-          memory = null;
+          this.memory = null;
           break;
         case 'M+':
-          memory = $scope.value;
+          this.memory = this.value;
           break;
         case 'M-':
-          memory = -1 * $scope.value;
+          this.memory = -1 * this.value;
           break;
         case 'MR':
-          $scope.value = memory|0;
+          this.value = this.memory|0;
           break;
         case '=':
-          stack.push($scope.value|0);
-          $scope.value = 0;
+          this.stack.push(this.value|0);
+          this.value = 0;
 
-          for (i = 0; i < stack.length; ++i) {
-            if (OP.exec(stack[i])) {
-              if ('+' == stack[i]) {
-                $scope.value = stack[i+1] + stack[i+2];
-              } else if ('-' == stack[i]) {
-                $scope.value = stack[i+1] - stack[i+2];
-              } else if ('×' == stack[i]) {
-                $scope.value = stack[i+1] * stack[i+2];
-              } else if ('/' == stack[i]) {
-                $scope.value = stack[i+1] / stack[i+2];
+          for (i = 0; i < this.stack.length; ++i) {
+            if (OP.exec(this.stack[i])) {
+              if ('+' == this.stack[i]) {
+                this.value = this.stack[i+1] + this.stack[i+2];
+              } else if ('-' == this.stack[i]) {
+                this.value = this.stack[i+1] - this.stack[i+2];
+              } else if ('×' == this.stack[i]) {
+                this.value = this.stack[i+1] * this.stack[i+2];
+              } else if ('/' == this.stack[i]) {
+                this.value = this.stack[i+1] / this.stack[i+2];
               }
 
               i += 2;
             }
           }
 
-          stack = [];
+          this.stack = [];
           break;
         case '+-':
-          $scope.value = -1 * $scope.value;
-          restart = true;
+          this.value = -1 * this.value;
+          this.restart = true;
           break;
 
         case '×':
         case '/':
         case '+':
-          stack.push(name);
+          this.stack.push(command);
 
-          if (!restart) {
-            stack.push($scope.value);
+          if (!this.restart) {
+            this.stack.push(this.value);
           }
 
-          restart = true;
+          this.restart = true;
           break;
       }
     }
   };
+
+  this.$get = function () {
+    return CalculatorTool;
+  };
+});
+
+app.controller('CalculatorCtrl', function ($scope, CalculatorTool) {
+  var DIGIT = /^[0-9]$/
+    , OP = /^[×\/+-]$/;
+
+  this.calculator = $scope.calculator = new CalculatorTool();
 });
 
 app.directive('calculator', function () {

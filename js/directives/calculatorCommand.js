@@ -11,7 +11,7 @@ app.directive('calculatorCommand', function () {
   function link(scope, el, attr, calculator) {
     el.attr('type', 'button');
     el.on('click', function () {
-      calculator.exec(el.text());
+      scope.calculator.exec(el.text());
       scope.$digest();
     });
   }

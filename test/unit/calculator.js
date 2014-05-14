@@ -12,29 +12,31 @@ describe('calculator', function () {
     it('should add numbers together', inject(function ($controller) {
       var $scope = {};
       var Ctrl = $controller('CalculatorCtrl', { $scope: $scope });
+      var calc = Ctrl.calculator;
 
-      Ctrl.exec('6');
-      Ctrl.exec('+');
-      Ctrl.exec('9');
-      Ctrl.exec('=');
+      calc.exec('6');
+      calc.exec('+');
+      calc.exec('9');
+      calc.exec('=');
 
-      expect($scope.value).toEqual(15);
+      expect($scope.calculator.value).toEqual(15);
     }));
 
     it('should remember values', inject(function ($controller) {
       var $scope = {};
       var Ctrl = $controller('CalculatorCtrl', { $scope: $scope });
+      var calc = Ctrl.calculator;
 
-      Ctrl.exec('4');
-      Ctrl.exec('2');
-      Ctrl.exec('M+');
-      Ctrl.exec('C');
+      calc.exec('4');
+      calc.exec('2');
+      calc.exec('M+');
+      calc.exec('C');
 
-      expect($scope.value).toEqual(0);
+      expect(calc.value).toEqual(0);
 
-      Ctrl.exec('MR');
+      calc.exec('MR');
 
-      expect($scope.value).toEqual(42);
+      expect(calc.value).toEqual(42);
     }));
   });
 });
