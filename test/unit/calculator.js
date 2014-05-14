@@ -1,7 +1,18 @@
 
-
 describe('Calculator', function () {
   beforeEach(module('Calculator'));
+
+  function buttonMasher(Calculator, tests) {
+    tests.forEach(function (test) {
+      var calc = new Calculator();
+
+      test[0].forEach(function (key) {
+        calc.push(key);
+      });
+
+      expect(calc.value).toEqual(test[1]);
+    });
+  }
 
   describe('#pressButton', function () {
     it('should add two numbers', inject(function (Calculator) {
@@ -13,15 +24,7 @@ describe('Calculator', function () {
         [['2','3','+','9','9','='], 122]
       ];
 
-      tests.forEach(function (test) {
-        var calc = new Calculator();
-        test[0].forEach(function (key) {
-          calc.push(key);
-        });
-
-        expect(calc.value).toEqual(test[1]);
-      });
-
+      buttonMasher(Calculator, tests);
     }));
 
     it('should subtract two numbers', inject(function (Calculator) {
@@ -33,15 +36,7 @@ describe('Calculator', function () {
         [['2','3','-','9','9','='], 23-99]
       ];
 
-      tests.forEach(function (test) {
-        var calc = new Calculator();
-        test[0].forEach(function (key) {
-          calc.push(key);
-        });
-
-        expect(calc.value).toEqual(test[1]);
-      });
-
+      buttonMasher(Calculator, tests);
     }));
 
     it('should multiply two numbers', inject(function (Calculator) {
@@ -53,15 +48,7 @@ describe('Calculator', function () {
         [['2','3','*','9','9','='], 23*99]
       ];
 
-      tests.forEach(function (test) {
-        var calc = new Calculator();
-        test[0].forEach(function (key) {
-          calc.push(key);
-        });
-
-        expect(calc.value).toEqual(test[1]);
-      });
-
+      buttonMasher(Calculator, tests);
     }));
 
     it('should divide two numbers', inject(function (Calculator) {
@@ -73,15 +60,7 @@ describe('Calculator', function () {
         [['2','3','/','9','9','='], 23/99]
       ];
 
-      tests.forEach(function (test) {
-        var calc = new Calculator();
-        test[0].forEach(function (key) {
-          calc.push(key);
-        });
-
-        expect(calc.value).toEqual(test[1]);
-      });
-
+      buttonMasher(Calculator, tests);
     }));
   });
 });
