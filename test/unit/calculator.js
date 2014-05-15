@@ -1,9 +1,36 @@
+describe('calculator', function () {
+  var $compile;
+  var $rootScope;
+
+  beforeEach(module('templates'));
+  beforeEach(module('Calculator'));
+  beforeEach(inject(function (_$compile_, _$rootScope_) {
+    $compile = _$compile_;
+    $rootScope = _$rootScope_;
+  }));
+
+  it('renders into an element or attribute', function () {
+    var e1 = $compile('<calculator></calculator>')($rootScope);
+    var e2 = $compile('<div calculator></div>')($rootScope);
+
+    $rootScope.$digest();
+
+    // don't care about exact contents, that's what e2e is for.
+    expect(e1.html().length).toBeGreaterThan(0);
+    expect(e2.html().length).toBeGreaterThan(0);
+  });
+});
+
 describe('CalculatorCtrl', function () {
   beforeEach(module('Calculator'));
 
-  it('exists', inject(function ($controller) {
+  //
+  // not really useful, this is where e2e tests
+  // are much better in the overall scope of things
+  //
+  it('defines a calculator', inject(function ($controller) {
     var ctrl = $controller('CalculatorCtrl', { $scope: {} });
-    expect(ctrl).toBeDefined();
+    expect(ctrl.calculator).toBeDefined();
   }));
 });
 

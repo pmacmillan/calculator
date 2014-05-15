@@ -1,4 +1,5 @@
 angular.module('Calculator').
-controller('CalculatorCtrl', function () {
-});
+controller('CalculatorCtrl', ['Calculator', function (Calculator) {
+  this.calculator = new Calculator();
+}]);
 
