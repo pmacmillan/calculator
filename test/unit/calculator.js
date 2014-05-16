@@ -1,4 +1,5 @@
-describe('calculator', function () {
+/*
+describe('Calculator', function () {
   var $compile;
   var $rootScope;
 
@@ -10,10 +11,11 @@ describe('calculator', function () {
   }));
 
   it('renders into an element or attribute', function () {
-    var e1 = $compile('<calculator></calculator>')($rootScope);
-    var e2 = $compile('<div calculator></div>')($rootScope);
+    var scope = $rootScope.$new();
+    var e1 = $compile('<calculator></calculator>')(scope);
+    var e2 = $compile('<div calculator></div>')(scope);
 
-    $rootScope.$digest();
+    scope.$digest();
 
     // don't care about exact contents, that's what e2e is for.
     expect(e1.html().length).toBeGreaterThan(0);
@@ -33,6 +35,7 @@ describe('CalculatorCtrl', function () {
     expect(ctrl.calculator).toBeDefined();
   }));
 });
+*/
 
 describe('Calculator', function () {
   beforeEach(module('Calculator'));
@@ -99,5 +102,4 @@ describe('Calculator', function () {
     }));
   });
 });
-
 

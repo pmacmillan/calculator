@@ -1,3 +1,7 @@
+(function () {
+  'use strict'
+
+
 var module = angular.module('Calculator');
 
 module.directive('calculator', function () {
@@ -27,3 +31,4 @@ module.directive('calculatorCommand', function () {
   }
 });
 
+})();

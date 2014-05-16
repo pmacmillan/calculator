@@ -4,6 +4,9 @@ controller('CalculatorCtrl', ['$scope', 'Calculator', function ($scope, Calculat
 
   $scope.value = 0;
 
-  $scope.$watch(function () { return calc.value }, function (value) { $scope.value = value; console.log(value); });
+  $scope.$watch(
+    function () { return calc.value },
+    function (value) { $scope.value = value; }
+  );
 }]);
 

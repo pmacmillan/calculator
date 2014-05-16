@@ -1,4 +1,4 @@
 
-var app = angular.module('ExampleApp', ['Calculator']);
+angular.module('ExampleApp', ['Calculator']);
 
 
