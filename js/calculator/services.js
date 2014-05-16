@@ -4,7 +4,7 @@ angular.module('Calculator')
   var IS_DIGIT = /^\d$/i
     , IS_OPERATOR = /^[\+\-\*\/]$/i;
 
-  function Calculator() {
+  function Calculator(opts) {
     this.stack = [];
     this.value = '';
   }

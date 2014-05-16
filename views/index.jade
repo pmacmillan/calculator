@@ -2,11 +2,14 @@ doctype html
 head
   title Calculator
   link(rel='stylesheet', href='/css/calc.css')
-body(ng-app="CalculatorApp")
-  .calculator
+body(ng-app='ExampleApp',ng-init="value = 42;herp = 'derp';")
+  calculator(ng-model='value')
 
-  script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+  script(src='//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.16/angular.min.js')
 
   script(src='/js/calculator/module.js')
   script(src='/js/calculator/services.js')
+  script(src='/js/calculator/directives.js')
   script(src='/js/calculator/controllers.js')
+  script(src='/js/exampleApp.js')
